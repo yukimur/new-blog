@@ -1,18 +1,10 @@
 
-from flask import Flask,jsonify
-from flask_restful import Resource, Api
-from flask_sqlalchemy import SQLAlchemy
 from conf.mysql_conf import *
 from datetime import datetime
-
-# app = Flask(__name__)
-# api = Api(app)
-
-# app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
-db = SQLAlchemy()
-
+from db import db
 
 class User(db.Model):
+    __tablename__ = "User"
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True)
     email = db.Column(db.String(120))
@@ -23,8 +15,7 @@ class User(db.Model):
     papers = db.relationship('Paper', backref='User',
                                 lazy='dynamic')
     comments = db.relationship('Comment', backref='User',
-                                lazy='dynamic')
-
+                            lazy='dynamic')
     def __init__(self, username, email,password,role,last_login):
         self.username = username
         self.email = email
