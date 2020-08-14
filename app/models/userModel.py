@@ -16,17 +16,20 @@ class User(db.Model):
                                 lazy='dynamic')
     comments = db.relationship('Comment', backref='User',
                             lazy='dynamic')
-    def __init__(self, username, email,password,role,last_login):
+    def __init__(self, username, email,password):
         self.username = username
         self.email = email
         self.password = password
-        self.role = role
+        # self.role = role
         self.date_join = datetime.now()
-        self.last_login = last_login
+        # self.last_login = last_login
 
     def __repr__(self):
         return '<User %r>' % self.username
 
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
 
 if __name__ == "__main__":
     db.create_all()

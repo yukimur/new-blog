@@ -35,11 +35,11 @@ class Comment(db.Model):
     reply = db.Column(db.Integer)
     admire = db.Column(db.Integer)
     upload_time = db.Column(db.DateTime)
-    comment_id = db.Column(db.Integer, db.ForeignKey('Comment.id'))
+    # comment_id = db.Column(db.Integer, db.ForeignKey('Comment.id'))
     paper_id = db.Column(db.Integer, db.ForeignKey('Paper.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('User.id'))
-    comments = db.relationship('Comment', backref='Comment',
-                                lazy='dynamic')
+    # comments = db.relationship('Comment', backref='Comment',
+                                # lazy='dynamic')
 
     def __init__(self, comment, reply,admire):
         self.comment = comment
